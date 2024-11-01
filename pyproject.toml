@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "blog-backend"
+version = "0.1.0"
+description = "back end for the synai website"
+authors = ["Richard <bakobiibizo@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+fastapi = "^0.115.4"
+uvicorn = "^0.32.0"
+loguru = "^0.7.2"
+requests = "^2.32.3"
+python-dotenv = "^1.0.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
