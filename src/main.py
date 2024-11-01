@@ -1,10 +1,11 @@
-from fastapi import FastAPI, Request
-from fastapi.responses import HTMLResponse
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.staticfiles import StaticFiles
+from src.utils.static_manager import StaticManager
+from src.blog_posts.hackmd import router as blog_router
 
 
 app = FastAPI()
+static_manager = StaticManager()
 
 app.add_middleware(
     CORSMiddleware,
@@ -14,6 +15,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.mount("/data", StaticFiles(directory="data", html=True), name="Data")
+@app.get("/api/backups")
+async def list_backups(filename: str | None = None):
+    """List all backups, optionally filtered by original filename."""
+    return static_manager.list_backups(filename)
 
-
+# Include your blog router
+app.include_router(blog_router)
